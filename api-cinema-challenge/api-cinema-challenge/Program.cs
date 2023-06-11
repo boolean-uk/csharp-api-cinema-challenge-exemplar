@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using cinema.endpoints;
 using api_cinema_challenge.Models.Customer;
 using human.repository;
+using api_cinema_challenge.EndPoint;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +44,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.ConfigureCustomer();
-app.ConfigureCustomer();
+app.ConfigureMovie();
+app.ConfigureScreening();
 
 app.UseHttpsRedirection();
 

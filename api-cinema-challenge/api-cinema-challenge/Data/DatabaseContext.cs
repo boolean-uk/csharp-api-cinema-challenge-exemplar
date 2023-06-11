@@ -1,4 +1,6 @@
 ﻿using api_cinema_challenge.Models.Customer;
+using api_cinema_challenge.Models.Movie;
+using api_cinema_challenge.Models.Screening;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
@@ -23,5 +25,7 @@ namespace api_cinema_challenge.Data
 
         }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Screening> Screenings { get; set; }
     }
 }
