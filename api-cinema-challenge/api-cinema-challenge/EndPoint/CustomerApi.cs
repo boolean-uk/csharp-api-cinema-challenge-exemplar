@@ -16,7 +16,7 @@ namespace cinema.endpoints
             app.MapGet("/customers", Get);
             app.MapPut("/customers/{id}", Update);
             app.MapDelete("/customers/{id}", Delete);
-            //app.MapGet("/authors/{id}", GetAuthor);
+       
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]

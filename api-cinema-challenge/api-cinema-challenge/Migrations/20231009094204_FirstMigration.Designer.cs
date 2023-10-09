@@ -12,8 +12,8 @@ using api_cinema_challenge.Data;
 namespace api_cinema_challenge.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230611211508_AddedScreeningMovie")]
-    partial class AddedScreeningMovie
+    [Migration("20231009094204_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

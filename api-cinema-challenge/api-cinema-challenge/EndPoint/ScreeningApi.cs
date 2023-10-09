@@ -12,8 +12,8 @@ namespace api_cinema_challenge.EndPoint
     {
         public static void ConfigureScreening(this WebApplication app)
         {
-            app.MapPost("/screenings", Insert);
-            app.MapGet("/movies", Get);
+           // app.MapPost("/screenings", Insert);
+            //app.MapGet("/movies", Get);
           
         }
         [ProducesResponseType(StatusCodes.Status200OK)]

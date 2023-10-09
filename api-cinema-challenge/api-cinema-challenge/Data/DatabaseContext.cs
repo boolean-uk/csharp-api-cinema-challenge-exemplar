@@ -8,19 +8,18 @@ namespace api_cinema_challenge.Data
 {
     public class DatabaseContext : DbContext
     {
-        private static string GetConnectionString()
+        private string connectionString;
+        public DatabaseContext()
         {
-            string jsonSettings = File.ReadAllText("appsettings.json");
-            JObject configuration = JObject.Parse(jsonSettings);
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            connectionString = configuration.GetValue<string>("ConnectionStrings:DefaultConnectionString");
 
-            return configuration["ConnectionStrings"]["DefaultConnectionString"].ToString();
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
             //optionsBuilder.UseInMemoryDatabase(databaseName: "Library");            
-            optionsBuilder.UseNpgsql(GetConnectionString());
+            optionsBuilder.UseNpgsql(connectionString);
 
 
         }

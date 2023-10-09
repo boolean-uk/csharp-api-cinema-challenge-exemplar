@@ -10,10 +10,10 @@ namespace api_cinema_challenge.EndPoint
     {
         public static void ConfigureMovie(this WebApplication app)
         {
-            app.MapPost("/movies", Insert);
-            app.MapGet("/movies", Get);
-            app.MapPut("/movies/{id}", Update);
-            app.MapDelete("/movies/{id}", Delete);
+           // app.MapPost("/movies", Insert);
+            //app.MapGet("/movies", Get);
+            //app.MapPut("/movies/{id}", Update);
+            //app.MapDelete("/movies/{id}", Delete);
         }
 
 
