@@ -4,6 +4,9 @@ using cinema.endpoints;
 using api_cinema_challenge.Models.Customer;
 using human.repository;
 using api_cinema_challenge.EndPoint;
+using api_cinema_challenge.Models.Ticket;
+using api_cinema_challenge.Models.Screening;
+using api_cinema_challenge.Models.Movie;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ICustomer,  Customer>();
 builder.Services.AddScoped<IDatabaseRepository<Customer>, DatabaseRepository<Customer>>();
+builder.Services.AddScoped<IDatabaseRepository<Ticket>, DatabaseRepository<Ticket>>();
+builder.Services.AddScoped<IDatabaseRepository<Movie>, DatabaseRepository<Movie>>();
+builder.Services.AddScoped<IDatabaseRepository<Screening>, DatabaseRepository<Screening>>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,7 +51,7 @@ if (app.Environment.IsDevelopment())
 }
 app.ConfigureCustomer();
 app.ConfigureMovie();
-app.ConfigureScreening();
+app.ConfigureTicketApi();
 
 app.UseHttpsRedirection();
 

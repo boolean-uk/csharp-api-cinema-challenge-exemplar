@@ -38,7 +38,9 @@ namespace api_cinema_challenge.Migrations
                     title = table.Column<string>(type: "text", nullable: false),
                     rating = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    runtimeMins = table.Column<int>(type: "integer", nullable: false)
+                    runtimeMins = table.Column<int>(type: "integer", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +55,8 @@ namespace api_cinema_challenge.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     screenNumber = table.Column<int>(type: "integer", nullable: false),
                     capacity = table.Column<int>(type: "integer", nullable: false),
-                    startsAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    startsAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    MovieId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

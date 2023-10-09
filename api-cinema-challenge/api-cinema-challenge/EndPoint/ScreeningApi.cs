@@ -12,18 +12,22 @@ namespace api_cinema_challenge.EndPoint
     {
         public static void ConfigureScreening(this WebApplication app)
         {
-           // app.MapPost("/screenings", Insert);
-            //app.MapGet("/movies", Get);
+            app.MapPost("/movies/{id}/screenings", Insert);
+            app.MapGet("/movies/{id}/screenings", Get);
           
         }
         [ProducesResponseType(StatusCodes.Status200OK)]
-        private static async Task<IResult> Get(IDatabaseRepository<Screening> service)
+        private static async Task<IResult> Get(int id, IDatabaseRepository<Screening> screeningRepository)
         {
             try
             {
                 return await Task.Run(() =>
                 {
-                    return Results.Ok(service.GetAll());
+                    ScreeningGetResponse payload = new ScreeningGetResponse()
+                    {
+                        data = screeningRepository.GetAll().Where(s => s.MovieId == id).ToList()
+                    };
+                    return Results.Ok(payload);
                 });
             }
             catch (Exception ex)
@@ -32,16 +36,30 @@ namespace api_cinema_challenge.EndPoint
             }
         }
         [ProducesResponseType(StatusCodes.Status201Created)]
-        private static async Task<IResult> Insert(Screening screening, IDatabaseRepository<Screening> service)
+        private static async Task<IResult> Insert(int id, ScreeningPost model, IDatabaseRepository<Screening> service)
         {
             try
             {
                 return await Task.Run(() =>
                 {
-                    if (screening == null) return Results.NotFound();
+                    if (model == null) return Results.NotFound();
+                   
+                    Screening screening = new Screening()
+                    {
+                        MovieId = id,
+                        screenNumber=model.screenNumber,
+                        capacity=model.capacity,
+                        startsAt=model.startsAt,
+                        createdAt = DateTime.UtcNow,
+                        updatedAt=DateTime.UtcNow
+                    };
                     service.Insert(screening);
                     service.Save();
-                    return Results.Created($"https://localhost:7195/screenings/{screening.Id}", screening);
+                    ScreeningPostResponse payload = new ScreeningPostResponse()
+                    {
+                        data=screening
+                    };
+                    return Results.Created($"https://localhost:7195/screenings/{screening.Id}", payload);
                 });
             }
             catch (Exception ex)
