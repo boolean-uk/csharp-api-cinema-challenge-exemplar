@@ -49,9 +49,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.ConfigureCustomer();
 app.ConfigureMovie();
 app.ConfigureTicketApi();
+app.ConfigureScreening();
 
 app.UseHttpsRedirection();
 

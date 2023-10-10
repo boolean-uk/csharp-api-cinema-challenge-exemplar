@@ -1,0 +1,45 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+
+## movies
+## get movies
+GET https://localhost:7195/movies
+###
+
+## post a movie
+POST https://localhost:7195/movies
+Content-Type: application/json
+
+{
+  "title": "Star Wars",
+  "rating": "10",
+  "description": "a film about power",
+  "runtimeMins": 94,
+  "screenings": [
+    {
+      "screenNumber": 13,
+      "capacity": 3000,
+      "startsAt": "2023-10-01T08:45:00.000Z"
+    }
+  ]
+}
+
+
+
+
+###
+
+## screenings
+## create a screening
+POST https://localhost:7195/movies/6/screenings
+Content-Type: application/json
+
+{
+"screenNumber": 19,
+"capacity": 400,
+"startsAt": "2023-12-24T14:30:00.00000Z"
+}
+
+###
+## get all screenings
+GET https://localhost:7195/movies/6/screenings
