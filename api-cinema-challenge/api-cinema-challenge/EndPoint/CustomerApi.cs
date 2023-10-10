@@ -1,4 +1,5 @@
-﻿using api_cinema_challenge.Models.Customer;
+﻿using api_cinema_challenge.Models;
+using api_cinema_challenge.Models.Customer;
 using human.repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Design;
@@ -78,7 +79,14 @@ namespace cinema.endpoints
             {
                 return await Task.Run(() =>
                 {
-                    return Results.Ok(service.GetAll());
+                    //Payload<IEnumerable>
+
+                    Payload<IEnumerable<Customer>> payload = new Payload<IEnumerable<Customer>>()
+                    {
+                        data = service.GetAll()
+                    };
+
+                    return Results.Ok(payload);
                 });
             }
             catch (Exception ex)
@@ -103,7 +111,12 @@ namespace cinema.endpoints
                     newCustomer.updatedAt = DateTime.UtcNow;
                     service.Insert(newCustomer);
                     service.Save();
-                    return Results.Created($"https://localhost:7195/customer/{newCustomer.Id}", newCustomer);
+                    Payload<Customer> payload = new Payload<Customer>()
+                    {
+                        data = newCustomer
+                    };
+                   
+                    return Results.Created($"https://localhost:7195/customer/{newCustomer.Id}", payload);
                 });
             }
             catch (Exception ex)

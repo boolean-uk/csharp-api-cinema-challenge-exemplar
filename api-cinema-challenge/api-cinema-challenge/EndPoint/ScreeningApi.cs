@@ -5,6 +5,7 @@ using human.repository;
 using Microsoft.AspNetCore.Mvc;
 using api_cinema_challenge.Models.Movie;
 using api_cinema_challenge.Models.Screening;
+using api_cinema_challenge.Models;
 
 namespace api_cinema_challenge.EndPoint
 {
@@ -23,7 +24,7 @@ namespace api_cinema_challenge.EndPoint
             {
                 return await Task.Run(() =>
                 {
-                    ScreeningGetResponse payload = new ScreeningGetResponse()
+                    Payload<IEnumerable<Screening>> payload = new Payload<IEnumerable<Screening>>()
                     {
                         data = screeningRepository.GetAll().Where(s => s.MovieId == id).ToList()
                     };
@@ -55,10 +56,12 @@ namespace api_cinema_challenge.EndPoint
                     };
                     service.Insert(screening);
                     service.Save();
-                    ScreeningPostResponse payload = new ScreeningPostResponse()
+                    
+                    Payload<Screening> payload = new Payload<Screening>()
                     {
                         data=screening
                     };
+
                     return Results.Created($"https://localhost:7195/screenings/{screening.Id}", payload);
                 });
             }

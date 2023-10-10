@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddScoped<ICustomer,  Customer>();
+
 builder.Services.AddScoped<IDatabaseRepository<Customer>, DatabaseRepository<Customer>>();
 builder.Services.AddScoped<IDatabaseRepository<Ticket>, DatabaseRepository<Ticket>>();
 builder.Services.AddScoped<IDatabaseRepository<Movie>, DatabaseRepository<Movie>>();
@@ -28,11 +28,11 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "TITLE_OF_PROJECT_API",
-        Description = "DESCRIPTION_OF_API",
+        Title = "Cinema Challenge",
+        Description = "Cinema Challenge WebApi Project",
         Contact = new OpenApiContact
         {
-            Name = "YOUR_NAME",
+            Name = "Nigel",
         }
     });
 });

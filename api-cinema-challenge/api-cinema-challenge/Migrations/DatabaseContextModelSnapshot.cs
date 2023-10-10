@@ -117,6 +117,34 @@ namespace api_cinema_challenge.Migrations
 
                     b.ToTable("Screenings");
                 });
+
+            modelBuilder.Entity("api_cinema_challenge.Models.Ticket.Ticket", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ScreeningId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("numSeats")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Tickets");
+                });
 #pragma warning restore 612, 618
         }
     }

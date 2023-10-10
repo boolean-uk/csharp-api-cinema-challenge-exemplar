@@ -1,6 +1,6 @@
 ﻿namespace api_cinema_challenge.Models.Customer
 {
-    public class Customer : ICustomer
+    public class Customer 
     {
         public int Id { get; set; } 
         public string name { get; set; }

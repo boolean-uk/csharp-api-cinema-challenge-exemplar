@@ -1,4 +1,5 @@
-﻿using api_cinema_challenge.Models.Customer;
+﻿using api_cinema_challenge.Models;
+using api_cinema_challenge.Models.Customer;
 using api_cinema_challenge.Models.Movie;
 using api_cinema_challenge.Models.Screening;
 using human.repository;
@@ -62,8 +63,11 @@ namespace api_cinema_challenge.EndPoint
                         screeningRepository.Save();
                     }
 
-                    MoviePostResult result = new MoviePostResult();
-                    result.data = movie;
+                    Payload<Movie> result = new Payload<Movie>()
+                    {
+                        data = movie
+                    };
+
                     return Results.Created($"https://localhost:7195/movies/{movie.Id}", result);
                 });
             }
@@ -79,7 +83,7 @@ namespace api_cinema_challenge.EndPoint
             {
                 return await Task.Run(() =>
                 {
-                    MovieGet payload = new MovieGet()
+                    Payload<IEnumerable<Movie>> payload = new Payload<IEnumerable<Movie>>()
                     {
                         data = repository.GetAll()
                     };
@@ -101,21 +105,21 @@ namespace api_cinema_challenge.EndPoint
                     if (model == null) return Results.NotFound();
                     if (!repository.Table.Any(x => x.Id == id)) return Results.NotFound();
 
-                    var m = repository.GetById(id);
-                    m.rating = model.rating;
-                    m.title = model.title;
-                    m.description = model.description;
-                    m.runtimeMins = model.runtimeMins;
-                    m.updatedAt = DateTime.UtcNow;
+                    var movie = repository.GetById(id);
+                    movie.rating = model.rating;
+                    movie.title = model.title;
+                    movie.description = model.description;
+                    movie.runtimeMins = model.runtimeMins;
+                    movie.updatedAt = DateTime.UtcNow;
 
-                    repository.Update(m);
+                    repository.Update(movie);
                     repository.Save();
 
-                    MoviePutResponse result = new MoviePutResponse()
+                    Payload<Movie> payload = new Payload<Movie>()
                     {
-                        data = m
+                        data = movie
                     };
-                    return Results.Created($"https://localhost:7195/movies/{m.Id}", result);
+                    return Results.Created($"https://localhost:7195/movies/{movie.Id}", payload);
                 });
 
             }

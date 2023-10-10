@@ -12,8 +12,8 @@ using api_cinema_challenge.Data;
 namespace api_cinema_challenge.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231009121940_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20231010112322_LatestChangesScreeningEtc")]
+    partial class LatestChangesScreeningEtc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,15 +104,49 @@ namespace api_cinema_challenge.Migrations
                     b.Property<int>("capacity")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("screenNumber")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("startsAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("Id");
 
                     b.ToTable("Screenings");
+                });
+
+            modelBuilder.Entity("api_cinema_challenge.Models.Ticket.Ticket", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ScreeningId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("numSeats")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Tickets");
                 });
 #pragma warning restore 612, 618
         }

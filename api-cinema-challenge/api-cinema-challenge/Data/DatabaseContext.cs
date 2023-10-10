@@ -1,6 +1,7 @@
 ﻿using api_cinema_challenge.Models.Customer;
 using api_cinema_challenge.Models.Movie;
 using api_cinema_challenge.Models.Screening;
+using api_cinema_challenge.Models.Ticket;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
@@ -16,15 +17,12 @@ namespace api_cinema_challenge.Data
 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-            //optionsBuilder.UseInMemoryDatabase(databaseName: "Library");            
+        {        
             optionsBuilder.UseNpgsql(connectionString);
-
-
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Screening> Screenings { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

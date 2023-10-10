@@ -1,5 +1,8 @@
-﻿namespace api_cinema_challenge.Models.Movie
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace api_cinema_challenge.Models.Movie
 {
+    [NotMapped]
     public class MoviePut
     {
         public string title { get; set; }
