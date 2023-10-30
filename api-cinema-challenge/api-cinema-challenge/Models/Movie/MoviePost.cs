@@ -16,6 +16,6 @@ namespace api_cinema_challenge.Models.Movie
         [Required]
         public int runtimeMins { get; set; }
 
-        public required IEnumerable<ScreeningPost> screenings { get; set; }
+        public IEnumerable<ScreeningPost> screenings { get; set; }
     }
 }

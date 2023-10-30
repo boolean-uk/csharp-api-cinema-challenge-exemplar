@@ -7,9 +7,14 @@ using api_cinema_challenge.EndPoint;
 using api_cinema_challenge.Models.Ticket;
 using api_cinema_challenge.Models.Screening;
 using api_cinema_challenge.Models.Movie;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers(options =>
+{
+    options.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
+});
 // Add services to the container.
 
 

@@ -2,7 +2,9 @@
 using api_cinema_challenge.Models.Customer;
 using human.repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Design;
+
 using static System.Net.WebRequestMethods;
 
 namespace cinema.endpoints
@@ -98,6 +100,8 @@ namespace cinema.endpoints
         [ProducesResponseType(StatusCodes.Status201Created)]
         private static async Task<IResult> Insert(CustomerPost customerDetails, IDatabaseRepository<Customer> service)
         {
+           
+            
             try
             {
                 return await Task.Run(() =>

@@ -83,6 +83,7 @@ namespace api_cinema_challenge.EndPoint
             {
                 return await Task.Run(() =>
                 {
+                    
                     Payload<IEnumerable<Movie>> payload = new Payload<IEnumerable<Movie>>()
                     {
                         data = repository.GetAll()

@@ -1,4 +1,6 @@
 ﻿using api_cinema_challenge.Models;
+using api_cinema_challenge.Models.Customer;
+using api_cinema_challenge.Models.Screening;
 using api_cinema_challenge.Models.Ticket;
 using human.repository;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +18,23 @@ namespace api_cinema_challenge.EndPoint
 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        private static async Task<IResult> BookTicket(int customerid, int screeningid, TicketPost ticketPostDetails, IDatabaseRepository<Ticket> service)
+        private static async Task<IResult> BookTicket(int customerid, int screeningid, TicketPost ticketPostDetails, IDatabaseRepository<Ticket> ticketRepository, IDatabaseRepository<Screening> screeningRepository, IDatabaseRepository<Customer> s)
         {
             try
             {
                 return await Task.Run(() =>
                 {
+                    if (!screeningRepository.GetAll().Any(x => x.Id == screeningid)) return Results.NotFound();
+                    if (!screeningRepository.GetAll().Any(x => x.Id == screeningid)) return Results.NotFound();
+
+
+                    //check availability of seat?
+
+                    int capacity= screeningRepository.GetById(screeningid).capacity;
+                    
+
+
+
                     Ticket ticket = new Ticket()
                     {
                         createdAt = DateTime.UtcNow,
@@ -30,8 +43,8 @@ namespace api_cinema_challenge.EndPoint
                         ScreeningId= screeningid,
                         numSeats=ticketPostDetails.numSeats
                     };
-                    service.Insert(ticket);
-                    service.Save();
+                    ticketRepository.Insert(ticket);
+                    ticketRepository.Save();
 
 
 

@@ -8,4 +8,5 @@ namespace api_cinema_challenge.Models
         public string status { get; set; } = "success";
         public T data { get; set; }
     }
+
 }

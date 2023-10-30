@@ -9,6 +9,7 @@ namespace api_cinema_challenge.Models.Customer
         [Required]
         public string name { get; set; }
         [Required]
+        [EmailAddress]
         public string email { get; set; }
         [Required]
         public string phone { get; set; }
